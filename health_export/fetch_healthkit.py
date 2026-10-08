@@ -30,10 +30,10 @@ def main():
     workouts = fetch_json(f"{base}/workouts")
     print(f"Found {len(workouts)} total workouts")
 
-    # Filter to Apple Watch workouts
+    # Filter to Apple Watch workouts (iOS uses non-breaking space \u00a0 in "Apple\u00a0Watch")
     aw_workouts = [
         w for w in workouts
-        if 'Apple Watch' in w.get('source', '') or 'Bharat' in w.get('source', '')
+        if 'apple watch' in w.get('source', '').replace('\xa0', ' ').lower()
     ]
     print(f"Apple Watch workouts: {len(aw_workouts)}")
 
